@@ -1,6 +1,6 @@
 module Export
   module Strategy
-    class SyncExportStrategy
+    class SyncExportStrategy < ExportStrategy
       def execute
         export_instance = Export::Exporter.new(user_id)
         export_instance.export

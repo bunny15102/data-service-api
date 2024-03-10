@@ -7,9 +7,18 @@ class OrderController < ApplicationController
 
   def download_orders
     export_service_instance = ExportService.new
-    export_strategy = export_service_instance.select_export_strategy(params[:id])
+    export_strategy = export_service_instance.select_export_strategy(params[:id].to_i)
     zip_file = export_strategy.execute
 
-    export_service_instance.render_export_message(zip_file)
+    render_export_message(export_service_instance, zip_file)
+  end
+
+  private 
+  def render_export_message(export_service_instance, zip_file)
+    if export_service_instance.export_type == "sync"
+      send_data(File.read("#{Rails.root}/tmp/#{zip_file}"), type: 'application/zip', filename: zip_file)
+    else
+      render json: { status: 'success', message: ASYNC_RENDER_MESSAGE }
+    end
   end
 end

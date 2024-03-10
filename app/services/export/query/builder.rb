@@ -6,7 +6,7 @@ module Export
           from order_details 
           join users on order_details.user_id = users.id
           join products on order_details.product_id = products.id
-          where order_details.user_id = #{user.id}
+          where order_details.user_id = #{user_id}
           limit #{EXPORT_LIMIT}
           offset #{offset}
         "
