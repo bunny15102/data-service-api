@@ -14,6 +14,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_171761) do
   create_table "order_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.bigint "user_id", null: false
+    t.date "order_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_order_details_on_product_id"
@@ -21,11 +22,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_171761) do
   end
 
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "code"
-    t.string "name"
-    t.string "category"
+    t.string "code", null: false
+    t.string "name", null: false
+    t.string "category", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_products_on_code", unique: true
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
