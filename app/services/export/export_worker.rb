@@ -3,7 +3,7 @@ require 'utils/notification/email_notification'
 module Export
   class ExportWorker
     include Sidekiq::Worker
-    sidekiq_options retry: 5,dead: true
+    sidekiq_options retry: 2,dead: true
 
     def perform(user_id)
       export_instance = Export::Exporter.new(user_id)
@@ -13,10 +13,10 @@ module Export
       send_email_notification(zip_file_name)
     end 
 
-    def move_zip_file(export_instance)
+    def move_zip_file(zip_file_name)
       tmp_file_path = "#{Rails.root}/tmp/#{zip_file_name}"
-      public_file_path = "#{Rails.root}/tmp/#{zip_file_name}"
-      FileUtils.mv(tmp_file_path,public_file_path)
+      public_file_path = "#{Rails.root}/public/#{zip_file_name}"
+      FileUtils.mv(tmp_file_path, public_file_path)
     end
 
     def send_email_notification(zip_file_name)
