@@ -2,7 +2,7 @@ FILE_NO = 1
 EXPORT_OFFSET = 0
 EXPORT_LIMIT = 1000000
 SYNC_RENDER_MESSAGE = 'Synchronous export initiated'
-ASYNC_RENDER_MESSAGE = 'Asynchronous export initiated. It will get downloaded in sometime.'
+ASYNC_RENDER_MESSAGE = 'Asynchronous export initiated.You will receive the download link in your mail'
 EXPORT_CSV_HEADER = ["USERNAME","USER_EMAIL","PRODUCT_CODE","PRODUCT_NAME","PRODUCT_CATEGORY","ORDER_DATE"]
 EXPORT_SUCCESS_MAIL = {
     subject: "Export Success Notification",
